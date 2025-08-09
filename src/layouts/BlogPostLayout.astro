@@ -1,0 +1,39 @@
+---
+// src/layouts/BlogPostLayout.astro (완전 복원 및 alt 태그 수정 최종본)
+import BaseLayout from './BaseLayout.astro';
+
+const { frontmatter, slug } = Astro.props; // slug를 props로 받도록 명시
+
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<BaseLayout 
+  title={frontmatter.title} 
+  description={frontmatter.description}
+  image={frontmatter.heroImage}
+>
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <article class="bg-surface rounded-2xl shadow-xl p-8 md:p-12 lg:p-16">
+      <header class="mb-12 text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-primary mb-4">{frontmatter.title}</h1>
+        <div class="text-secondary">
+          <time datetime={frontmatter.pubDate.toISOString()}>{formattedDate}</time>
+        </div>
+      </header>
+      {frontmatter.heroImage && (
+        <img 
+          src={frontmatter.heroImage} 
+          alt={frontmatter.heroImageAlt || `"${frontmatter.title}" 게시물의 대표 이미지`}
+          class="w-full h-auto rounded-lg mb-12 object-cover aspect-video"
+          transition:name={slug}
+        />
+      )}
+      <div class="prose max-w-none">
+        <slot />
+      </div>
+    </article>
+  </div>
+</BaseLayout>

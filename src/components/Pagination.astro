@@ -1,0 +1,20 @@
+---
+const { page } = Astro.props;
+---
+<nav class="flex justify-center items-center space-x-4 my-16 text-lg">
+  {page.url.prev ? (
+    <a href={page.url.prev} class="px-5 py-2.5 bg-surface rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
+      ← 이전
+    </a>
+  ) : (
+    <span class="px-5 py-2.5 bg-gray-100 text-gray-400 rounded-lg cursor-not-allowed">← 이전</span>
+  )}
+  <span class="font-semibold text-secondary">{page.currentPage} / {page.lastPage}</span>
+  {page.url.next ? (
+    <a href={page.url.next} class="px-5 py-2.5 bg-surface rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
+      다음 →
+    </a>
+  ) : (
+    <span class="px-5 py-2.5 bg-gray-100 text-gray-400 rounded-lg cursor-not-allowed">다음 →</span>
+  )}
+</nav>

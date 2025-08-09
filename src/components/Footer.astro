@@ -1,0 +1,16 @@
+---
+// src/components/Footer.astro
+import { SITE_TITLE } from '../consts';
+const today = new Date();
+---
+<footer class="bg-surface border-t border-border mt-24">
+  <div class="max-w-7xl mx-auto px-6 py-12 text-center text-secondary text-sm">
+    <p>© {today.getFullYear()} 해봐. All rights reserved.</p>
+    <div class="mt-4 flex justify-center space-x-4">
+      {/* 애드센스를 위해 이 링크들은 남겨둡니다. */}
+      <a href="/about" class="hover:text-primary">소개</a>
+      <a href="/contact" class="hover:text-primary">문의</a>
+      <a href="/privacy" class="hover:text-primary">개인정보처리방침</a>
+    </div>
+  </div>
+</footer>

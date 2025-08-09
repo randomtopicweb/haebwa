@@ -1,0 +1,36 @@
+/* src/styles/global.css */
+/* 웹에서 프리텐다드 폰트를 가져옵니다. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { @apply scroll-smooth; }
+  body {
+    @apply bg-background text-primary font-sans tracking-tight;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* ▼▼▼ 이미지 로딩 효과 추가됨 ▼▼▼ */
+  img { 
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+  /* ▲▲▲ 이미지 로딩 효과 추가됨 ▲▲▲ */
+  
+  /* 블로그 글 본문을 위한 최고급 스타일링 */
+  .prose { @apply text-secondary; }
+  .prose h2 { @apply text-2xl lg:text-3xl mt-16 mb-6 border-b border-border pb-3 font-bold text-primary; }
+  .prose h3 { @apply text-xl lg:text-2xl mt-10 mb-4 font-bold text-primary; }
+  .prose p { @apply my-5 leading-8; }
+  .prose a { @apply text-accent hover:underline decoration-accent decoration-2 underline-offset-4; }
+  .prose strong { @apply text-primary; }
+  .prose blockquote { @apply border-l-4 border-accent bg-blue-50/50 p-4 my-6 italic; }
+  .prose pre { @apply bg-primary text-surface p-4 rounded-lg my-8 text-sm overflow-x-auto; }
+  .prose code:not(in-pre) { @apply bg-gray-200 text-secondary font-mono px-1.5 py-0.5 rounded-md text-sm; }
+  .prose ul, .prose ol { @apply my-5 pl-5 space-y-2; }
+  .prose li::marker { @apply text-accent; }
+}

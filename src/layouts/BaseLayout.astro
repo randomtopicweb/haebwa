@@ -1,0 +1,50 @@
+---
+// src/layouts/BaseLayout.astro (모바일 최적화 버전)
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { ViewTransitions } from 'astro:transitions';
+interface Props { title?: string; description?: string; }
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+---
+<!doctype html>
+<html lang="ko" class="scroll-pt-20">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><link rel="icon" type="image/svg+xml" href="/favicon.svg" /><meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <title>{title}</title><meta name="description" content={description} />
+    <ViewTransitions fallback="swap" />
+  </head>
+  <body class="bg-background text-primary transition-colors duration-300">
+    <Header />
+    <main><slot /></main>
+    <Footer />
+    <style is:global>
+      @import '../styles/global.css';
+      /* ▼▼▼ 모바일에서도 잘 보이는 Swiper 컨트롤러 스타일 ▼▼▼ */
+      :root {
+        --swiper-navigation-size: 32px; /* 화살표 아이콘 크기 */
+        --swiper-theme-color: #ffffff; /* 화살표 및 페이지네이션 색상 */
+      }
+      .swiper-button-next, .swiper-button-prev {
+        width: 44px;
+        height: 44px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        transition: background-color 0.2s;
+      }
+      .swiper-button-next:hover, .swiper-button-prev:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .swiper-pagination-bullet-active {
+        background-color: white !important;
+      }
+      /* ▲▲▲ 여기까지 ▲▲▲ */
+    </style>
+  </body>
+</html>
