@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://haebwa.pages.dev/sitemap-index.xml
+Sitemap: https://haebwa.com/sitemap-index.xml
