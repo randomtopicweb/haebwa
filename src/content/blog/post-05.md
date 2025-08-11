@@ -1,7 +1,7 @@
 ---
 title: "만약 GPS가 없었다면, 우린 길치들의 세상에 살고 있었을까?"
 description: "티맵, 카카오맵이 먹통이 된 세상을 상상해보셨나요? GPS가 없었다면 우리의 여행, 배달 문화, 그리고 '길치'라는 개념은 어떻게 달라졌을까요? 단순한 길 찾기를 넘어 우리 삶의 시스템을 바꾼 GPS의 진짜 가치를 탐구합니다."
-pubDate: 2025-07-05
+pubDate: 2025-07-13
 heroImage: "/images/gps.jpg"
 heroImageAlt: "gps"
 ---
