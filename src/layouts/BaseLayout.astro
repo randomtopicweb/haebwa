@@ -1,18 +1,49 @@
 ---
-// src/layouts/BaseLayout.astro (모바일 최적화 버전)
+// src/layouts/BaseLayout.astro (애드센스 코드 스니펫 추가 및 AdSense 컴포넌트 제거 최종본)
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { ViewTransitions } from 'astro:transitions';
-interface Props { title?: string; description?: string; }
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const pageTitle = Astro.props.title ? `${Astro.props.title} | ${SITE_TITLE}` : SITE_TITLE;
+const pageDescription = Astro.props.description || SITE_DESCRIPTION;
+const ogImage = new URL(Astro.props.image || '/og-image.png', Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
 <html lang="ko" class="scroll-pt-20">
   <head>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><link rel="icon" type="image/svg+xml" href="/favicon.svg" /><meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <title>{title}</title><meta name="description" content={description} />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@@11/swiper-bundle.min.css"/>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6629581443405825"
+    crossorigin="anonymous"></script>
+
+    {/* --- SEO & 소셜 공유를 위한 핵심 메타 태그 --- */}
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="author" content="해봐" />
+    
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:locale" content="ko_KR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
     <ViewTransitions fallback="swap" />
   </head>
   <body class="bg-background text-primary transition-colors duration-300">
@@ -21,30 +52,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     <Footer />
     <style is:global>
       @import '../styles/global.css';
-      /* ▼▼▼ 모바일에서도 잘 보이는 Swiper 컨트롤러 스타일 ▼▼▼ */
-      :root {
-        --swiper-navigation-size: 32px; /* 화살표 아이콘 크기 */
-        --swiper-theme-color: #ffffff; /* 화살표 및 페이지네이션 색상 */
-      }
-      .swiper-button-next, .swiper-button-prev {
-        width: 44px;
-        height: 44px;
-        background-color: rgba(0, 0, 0, 0.2);
-        border-radius: 50%;
-        transition: background-color 0.2s;
-      }
-      .swiper-button-next:hover, .swiper-button-prev:hover {
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-      .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
-        background-color: rgba(255, 255, 255, 0.5);
-      }
-      .swiper-pagination-bullet-active {
-        background-color: white !important;
-      }
-      /* ▲▲▲ 여기까지 ▲▲▲ */
+      .swiper-button-next::after, .swiper-button-prev::after { font-size: 24px !important; font-weight: bold; }
+      .swiper-button-next, .swiper-button-prev { color: white !important; }
+      .swiper-pagination-bullet-active { background: white !important; }
     </style>
   </body>
 </html>
